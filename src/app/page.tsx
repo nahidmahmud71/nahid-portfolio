@@ -31,13 +31,13 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
-// --- ANIMATION VARIANTS (Fixed for TypeScript Strict Mode) ---
+// --- ANIMATION VARIANTS ---
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -330,14 +330,12 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#06080e] text-slate-200 font-sans selection:bg-amber-500 selection:text-black relative">
-      {/* Subtle Ambient Background Glows */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute -top-40 -left-40 w-[550px] h-[550px] bg-amber-500/[0.06] rounded-full blur-[140px]" />
         <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] bg-blue-600/[0.05] rounded-full blur-[140px]" />
         <div className="absolute -bottom-40 left-1/3 w-[600px] h-[600px] bg-amber-600/[0.04] rounded-full blur-[160px]" />
       </div>
 
-      {/* ================= USER-FRIENDLY FLOATING NAVBAR ================= */}
       <header
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           scrolled
@@ -346,7 +344,6 @@ export default function Home() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          {/* Brand Logo */}
           <a href="#about" className="flex items-center gap-3.5 group">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 font-black flex items-center justify-center text-sm shadow-[0_0_20px_rgba(245,158,11,0.25)] group-hover:scale-105 transition-transform">
               NM
@@ -362,7 +359,6 @@ export default function Home() {
             </div>
           </a>
 
-          {/* Interactive Section Links */}
           <nav className="hidden lg:flex items-center gap-1 bg-white/[0.03] border border-white/[0.07] p-1.5 rounded-full backdrop-blur-md">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
@@ -382,7 +378,6 @@ export default function Home() {
             })}
           </nav>
 
-          {/* Direct CTA */}
           <div className="flex items-center gap-3">
             <a
               href="#contact"
@@ -394,12 +389,11 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ================= 1. HERO SECTION ================= */}
+      {/* HERO SECTION */}
       <section
         id="about"
         className="relative z-10 max-w-7xl mx-auto px-6 pt-36 pb-24 lg:pt-44 lg:pb-32 flex flex-col lg:flex-row items-center justify-between gap-16 min-h-screen"
       >
-        {/* Left Column: Bio & Value Proposition */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -433,7 +427,6 @@ export default function Home() {
             <strong className="text-amber-400 font-medium">AURENZA</strong> or engineering complex software systems, I combine deep computer science fundamentals with executive-level visual polish.
           </motion.p>
 
-          {/* Key Highlights Pills */}
           <motion.div variants={fadeUp} className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10 max-w-2xl">
             <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
               <p className="text-amber-400 font-bold text-sm">Founder & CEO</p>
@@ -449,7 +442,6 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Action Buttons & Socials */}
           <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4">
             <a
               href="#projects"
@@ -495,7 +487,6 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {/* Right Column: Original Full-Color Executive Photo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -530,7 +521,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ================= 2. WHAT DRIVES ME (PASSION PILLARS) ================= */}
+      {/* PASSIONS */}
       <section id="passions" className="relative z-10 py-28 border-t border-white/[0.06] bg-[#080b12]">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
@@ -559,18 +550,20 @@ export default function Home() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.07] hover:border-amber-500/30 hover:bg-white/[0.035] transition-all group"
+                className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.07] hover:border-amber-500/30 hover:bg-white/[0.035] transition-all group flex flex-col justify-between"
               >
-                <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  {pillar.icon}
+                <div>
+                  <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    {pillar.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-amber-400 transition-colors">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                    {pillar.desc}
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-amber-400 transition-colors">
-                  {pillar.title}
-                </h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                  {pillar.desc}
-                </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-white/[0.04]">
                   {pillar.tags.map((tag, i) => (
                     <span
                       key={i}
@@ -586,7 +579,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= 3. INTERACTIVE PROJECTS SHOWCASE ================= */}
+      {/* PROJECTS */}
       <section id="projects" className="relative z-10 py-28 border-t border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14">
@@ -599,7 +592,6 @@ export default function Home() {
               </h2>
             </div>
 
-            {/* Interactive Category Filter Buttons */}
             <div className="flex flex-wrap gap-2">
               {["All", "AI & Vision", "Full-Stack", "Data & Urban", "Core Systems"].map((cat) => (
                 <button
@@ -617,7 +609,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Filtered Projects Grid */}
           <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((proj) => (
@@ -676,7 +667,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= PROJECT ARCHITECTURE MODAL ================= */}
+      {/* MODAL */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -750,7 +741,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* ================= 4. COMPREHENSIVE SKILLS & TOOLKIT ================= */}
+      {/* SKILLS */}
       <section id="skills" className="relative z-10 py-28 border-t border-white/[0.06] bg-[#080b12]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14">
@@ -763,7 +754,6 @@ export default function Home() {
               </h2>
             </div>
 
-            {/* Interactive Skill Filter */}
             <div className="flex flex-wrap gap-2">
               {["All", "AI & Vision", "Full-Stack Web", "Core CS & Data", "Tools & Strategy"].map(
                 (tab) => (
@@ -784,7 +774,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {filteredSkills.map((group, idx) => (
+            {filteredSkills.map((group) => (
               <motion.div
                 key={group.category}
                 initial="hidden"
@@ -816,7 +806,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Workflow & Documentation Banner */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -845,7 +834,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= 5. LEADERSHIP, INTERNSHIP & EXPERIENCE ================= */}
+      {/* EXPERIENCE */}
       <section id="experience" className="relative z-10 py-28 border-t border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
@@ -864,32 +853,33 @@ export default function Home() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Role 1: AURENZA */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.07] hover:border-amber-500/30 transition-all"
+              className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.07] hover:border-amber-500/30 transition-all flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-400 flex items-center justify-center">
-                    <Briefcase size={22} />
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-400 flex items-center justify-center">
+                      <Briefcase size={22} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white">CEO & Founder</h3>
+                      <p className="text-amber-400 text-xs font-semibold">AURENZA Luxury Apparel</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white">CEO & Founder</h3>
-                    <p className="text-amber-400 text-xs font-semibold">AURENZA Luxury Apparel</p>
-                  </div>
+                  <span className="text-xs text-slate-400 bg-white/[0.04] px-3 py-1 rounded-full">
+                    Founder
+                  </span>
                 </div>
-                <span className="text-xs text-slate-400 bg-white/[0.04] px-3 py-1 rounded-full">
-                  Founder
-                </span>
+                <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                  Founded and lead AURENZA, directing both brand identity and full-stack e-commerce engineering. Designed curated men&apos;s and women&apos;s luxury collections with a responsive storefront architecture.
+                </p>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Founded and lead AURENZA, directing both brand identity and full-stack e-commerce engineering. Designed curated men&apos;s and women&apos;s luxury collections with a responsive storefront architecture.
-              </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-white/[0.04]">
                 {["Brand Direction", "Full-Stack E-Commerce", "UI/UX Architecture", "Product Strategy"].map(
                   (t, i) => (
                     <span
@@ -903,32 +893,33 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Role 2: Sky2Edu Internship */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.07] hover:border-blue-500/30 transition-all"
+              className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.07] hover:border-blue-500/30 transition-all flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-500/15 text-blue-400 flex items-center justify-center">
-                    <Activity size={22} />
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-500/15 text-blue-400 flex items-center justify-center">
+                      <Activity size={22} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white">Operations & Strategy Intern</h3>
+                      <p className="text-blue-400 text-xs font-semibold">Sky2Edu Study Abroad</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white">Operations & Strategy Intern</h3>
-                    <p className="text-blue-400 text-xs font-semibold">Sky2Edu Study Abroad</p>
-                  </div>
+                  <span className="text-xs text-slate-400 bg-white/[0.04] px-3 py-1 rounded-full">
+                    Internship
+                  </span>
                 </div>
-                <span className="text-xs text-slate-400 bg-white/[0.04] px-3 py-1 rounded-full">
-                  Internship
-                </span>
+                <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                  Conducted an in-depth organizational operations analysis, producing a comprehensive final report and consulting-style executive presentation with strategic workflow recommendations.
+                </p>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Conducted an in-depth organizational operations analysis, producing a comprehensive final report and consulting-style executive presentation with strategic workflow recommendations.
-              </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-white/[0.04]">
                 {["Operations Analysis", "Strategic Consulting", "Workflow Optimization", "Executive Reporting"].map(
                   (t, i) => (
                     <span
@@ -942,32 +933,33 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Role 3: Team Andromeda */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.07] hover:border-emerald-500/30 transition-all"
+              className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.07] hover:border-emerald-500/30 transition-all flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
-                    <Layers size={22} />
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                      <Layers size={22} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white">Project Manager & Report Lead</h3>
+                      <p className="text-emerald-400 text-xs font-semibold">Team Andromeda</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white">Project Manager & Report Lead</h3>
-                    <p className="text-emerald-400 text-xs font-semibold">Team Andromeda</p>
-                  </div>
+                  <span className="text-xs text-slate-400 bg-white/[0.04] px-3 py-1 rounded-full">
+                    Team Lead
+                  </span>
                 </div>
-                <span className="text-xs text-slate-400 bg-white/[0.04] px-3 py-1 rounded-full">
-                  Team Lead
-                </span>
+                <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                  Led peer engineering teams across complex academic software deliverables, overseeing system architecture, UML modeling, and LaTeX technical documentation for Information Systems Design.
+                </p>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Led peer engineering teams across complex academic software deliverables, overseeing system architecture, UML modeling, and LaTeX technical documentation for Information Systems Design.
-              </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-white/[0.04]">
                 {["Project Management", "System Architecture", "UML Diagrams", "XeLaTeX Reports"].map(
                   (t, i) => (
                     <span
@@ -981,32 +973,33 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Role 4: Future World YouTube */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.07] hover:border-red-500/30 transition-all"
+              className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.07] hover:border-red-500/30 transition-all flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-red-500/15 text-red-400 flex items-center justify-center">
-                    <Play size={22} />
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-12 h-12 rounded-2xl bg-red-500/15 text-red-400 flex items-center justify-center">
+                      <Play size={22} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white">Content Creator & Channel Manager</h3>
+                      <p className="text-red-400 text-xs font-semibold">Future World (YouTube)</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white">Content Creator & Channel Manager</h3>
-                    <p className="text-red-400 text-xs font-semibold">Future World (YouTube)</p>
-                  </div>
+                  <span className="text-xs text-slate-400 bg-white/[0.04] px-3 py-1 rounded-full">
+                    Digital Media
+                  </span>
                 </div>
-                <span className="text-xs text-slate-400 bg-white/[0.04] px-3 py-1 rounded-full">
-                  Digital Media
-                </span>
+                <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                  Produce and manage multimedia content exploring emerging technologies, AI innovations, and digital storytelling—combining video production with audience growth and SEO strategy.
+                </p>
               </div>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Produce and manage multimedia content exploring emerging technologies, AI innovations, and digital storytelling—combining video production with audience growth and SEO strategy.
-              </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-white/[0.04]">
                 {["Tech Storytelling", "Video Production", "YouTube SEO", "Digital Branding"].map(
                   (t, i) => (
                     <span
@@ -1023,66 +1016,68 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= 6. EDUCATION & CERTIFICATIONS (NO CGPA) ================= */}
+      {/* EDUCATION */}
       <section id="education" className="relative z-10 py-28 border-t border-white/[0.06] bg-[#080b12]">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Academic Degree & Coursework */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="lg:col-span-7 p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.07]"
+            className="lg:col-span-7 p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.07] flex flex-col justify-between"
           >
-            <div className="flex items-center gap-3.5 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-400 flex items-center justify-center">
-                <GraduationCap size={26} />
+            <div>
+              <div className="flex items-center gap-3.5 mb-6">
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-400 flex items-center justify-center">
+                  <GraduationCap size={26} />
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-widest text-amber-400">
+                    Academic Foundation
+                  </p>
+                  <h3 className="text-2xl font-bold text-white">
+                    B.Sc. in Computer Science & Engineering
+                  </h3>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-amber-400">
-                  Academic Foundation
-                </p>
-                <h3 className="text-2xl font-bold text-white">
-                  B.Sc. in Computer Science & Engineering
-                </h3>
-              </div>
+
+              <p className="text-slate-300 font-medium text-sm mb-2">
+                Southeast University (SEU) • Dhaka, Bangladesh
+              </p>
+              <p className="text-slate-400 text-sm leading-relaxed mb-8">
+                Focused on advanced algorithmic problem-solving, software system architecture, computer networks, and applied artificial intelligence.
+              </p>
             </div>
 
-            <p className="text-slate-300 font-medium text-sm mb-2">
-              Southeast University (SEU) • Dhaka, Bangladesh
-            </p>
-            <p className="text-slate-400 text-sm leading-relaxed mb-8">
-              Focused on advanced algorithmic problem-solving, software system architecture, computer networks, and applied artificial intelligence.
-            </p>
-
-            <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">
-              Core Engineering Domains Studied
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {[
-                "Data Structures & Algorithms",
-                "Information Systems Design",
-                "Object-Oriented Programming (Java)",
-                "Computer Architecture",
-                "Digital Logic Design",
-                "Numerical Methods",
-                "Linear Algebra & Matrices",
-                "Computer Networks",
-                "Data Communication",
-                "Statistics & Probability",
-                "Engineering Ethics",
-              ].map((course, i) => (
-                <span
-                  key={i}
-                  className="text-xs text-slate-300 bg-white/[0.04] border border-white/[0.06] px-3.5 py-1.5 rounded-xl"
-                >
-                  {course}
-                </span>
-              ))}
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-white mb-4">
+                Core Engineering Domains Studied
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Data Structures & Algorithms",
+                  "Information Systems Design",
+                  "Object-Oriented Programming (Java)",
+                  "Computer Architecture",
+                  "Digital Logic Design",
+                  "Numerical Methods",
+                  "Linear Algebra & Matrices",
+                  "Computer Networks",
+                  "Data Communication",
+                  "Statistics & Probability",
+                  "Engineering Ethics",
+                ].map((course, i) => (
+                  <span
+                    key={i}
+                    className="text-xs text-slate-300 bg-white/[0.04] border border-white/[0.06] px-3.5 py-1.5 rounded-xl"
+                  >
+                    {course}
+                  </span>
+                ))}
+              </div>
             </div>
           </motion.div>
 
-          {/* Certifications */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -1090,53 +1085,55 @@ export default function Home() {
             variants={fadeUp}
             className="lg:col-span-5 flex flex-col justify-between gap-4"
           >
-            <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.07] h-full">
-              <div className="flex items-center gap-3 mb-6">
-                <Award className="text-amber-400" size={24} />
-                <h3 className="text-xl font-bold text-white">Professional Certifications</h3>
-              </div>
+            <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.07] h-full flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <Award className="text-amber-400" size={24} />
+                  <h3 className="text-xl font-bold text-white">Professional Certifications</h3>
+                </div>
 
-              <div className="space-y-4">
-                {[
-                  {
-                    title: "AI Workflows & Agents",
-                    issuer: "Grameenphone Academy",
-                    focus: "Autonomous AI pipelines & agentic orchestration",
-                  },
-                  {
-                    title: "Think AI Certification",
-                    issuer: "Grameenphone Academy",
-                    focus: "Applied AI strategy & modern machine learning foundations",
-                  },
-                  {
-                    title: "Networking & Technical Coursework",
-                    issuer: "Cisco Networking Academy",
-                    focus: "Network protocols, routing architecture & security",
-                  },
-                  {
-                    title: "Software & Career Specializations",
-                    issuer: "Coursera & LinkedIn Learning",
-                    focus: "Full-stack development & professional engineering workflows",
-                  },
-                ].map((cert, i) => (
-                  <div
-                    key={i}
-                    className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-amber-500/30 transition-colors"
-                  >
-                    <div className="flex items-center justify-between mb-1">
-                      <h4 className="text-sm font-bold text-white">{cert.title}</h4>
-                      <span className="text-[11px] text-amber-400 font-medium">{cert.issuer}</span>
+                <div className="space-y-4">
+                  {[
+                    {
+                      title: "AI Workflows & Agents",
+                      issuer: "Grameenphone Academy",
+                      focus: "Autonomous AI pipelines & agentic orchestration",
+                    },
+                    {
+                      title: "Think AI Certification",
+                      issuer: "Grameenphone Academy",
+                      focus: "Applied AI strategy & modern machine learning foundations",
+                    },
+                    {
+                      title: "Networking & Technical Coursework",
+                      issuer: "Cisco Networking Academy",
+                      focus: "Network protocols, routing architecture & security",
+                    },
+                    {
+                      title: "Software & Career Specializations",
+                      issuer: "Coursera & LinkedIn Learning",
+                      focus: "Full-stack development & professional engineering workflows",
+                    },
+                  ].map((cert, i) => (
+                    <div
+                      key={i}
+                      className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-amber-500/30 transition-colors"
+                    >
+                      <div className="flex items-center justify-between mb-1">
+                        <h4 className="text-sm font-bold text-white">{cert.title}</h4>
+                        <span className="text-[11px] text-amber-400 font-medium">{cert.issuer}</span>
+                      </div>
+                      <p className="text-xs text-slate-400">{cert.focus}</p>
                     </div>
-                    <p className="text-xs text-slate-400">{cert.focus}</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ================= 7. CLEAN EXECUTIVE FOOTER ================= */}
+      {/* FOOTER */}
       <footer id="contact" className="relative z-10 pt-28 pb-14 border-t border-white/[0.08] bg-[#04060a]">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <motion.div
@@ -1182,7 +1179,6 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Bottom Bar */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/[0.06] text-xs text-slate-500">
             <p>© 2026 Mohammad Nahid Mahmud. Crafted in Dhaka, Bangladesh.</p>
             <button
