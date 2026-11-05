@@ -31,13 +31,13 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
-// --- ANIMATION VARIANTS ---
+// --- ANIMATION VARIANTS (Fixed for TypeScript Strict Mode) ---
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
@@ -394,7 +394,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ================= 1. HERO SECTION (FULL COLOR PHOTO, NO CGPA/ID) ================= */}
+      {/* ================= 1. HERO SECTION ================= */}
       <section
         id="about"
         className="relative z-10 max-w-7xl mx-auto px-6 pt-36 pb-24 lg:pt-44 lg:pb-32 flex flex-col lg:flex-row items-center justify-between gap-16 min-h-screen"
@@ -433,7 +433,7 @@ export default function Home() {
             <strong className="text-amber-400 font-medium">AURENZA</strong> or engineering complex software systems, I combine deep computer science fundamentals with executive-level visual polish.
           </motion.p>
 
-          {/* Key Highlights Pills (No CGPA/ID) */}
+          {/* Key Highlights Pills */}
           <motion.div variants={fadeUp} className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10 max-w-2xl">
             <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
               <p className="text-amber-400 font-bold text-sm">Founder & CEO</p>
@@ -503,10 +503,7 @@ export default function Home() {
           className="w-full lg:w-[42%] flex justify-center lg:justify-end"
         >
           <div className="relative w-full max-w-[410px]">
-            {/* Soft Golden Aura Behind Photo */}
             <div className="absolute -inset-3 bg-gradient-to-tr from-amber-500/20 via-amber-400/10 to-blue-500/10 rounded-[2rem] blur-2xl pointer-events-none" />
-
-            {/* Main Photo Card - ORIGINAL FULL COLOR (No grayscale!) */}
             <div className="relative aspect-[4/5] w-full rounded-[2rem] overflow-hidden border border-white/15 bg-slate-900 shadow-[0_25px_70px_rgba(0,0,0,0.75)] group">
               <Image
                 src="/profile.jpg"
@@ -515,10 +512,7 @@ export default function Home() {
                 className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 priority
               />
-              {/* Subtle bottom gradient only for text legibility */}
               <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
-
-              {/* Executive Identity Overlay */}
               <div className="absolute bottom-5 left-5 right-5 p-4 rounded-2xl bg-slate-950/75 backdrop-blur-md border border-white/10 flex items-center justify-between">
                 <div>
                   <p className="text-white font-bold text-sm">Mohammad Nahid Mahmud</p>
@@ -1029,7 +1023,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= 6. EDUCATION & CERTIFICATIONS (NO CGPA/ID) ================= */}
+      {/* ================= 6. EDUCATION & CERTIFICATIONS (NO CGPA) ================= */}
       <section id="education" className="relative z-10 py-28 border-t border-white/[0.06] bg-[#080b12]">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Academic Degree & Coursework */}
@@ -1049,7 +1043,7 @@ export default function Home() {
                   Academic Foundation
                 </p>
                 <h3 className="text-2xl font-bold text-white">
-                  B.Sc. in Computer Science & Engineering (CSE)
+                  B.Sc. in Computer Science & Engineering
                 </h3>
               </div>
             </div>
